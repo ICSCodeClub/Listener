@@ -72,8 +72,10 @@ class Listener():
             self._stop_listening(wait_for_stop=wait_for_stop)
             self._listening = False
     
-    def listen(self, stop_timer:timedelta=timedelta(0,30)):
-        """Halts the main thread until no new audio was recognized for 'stop_timer'"""
+    def listen(self, stop_timer=timedelta(0,30)):
+        """Halts the main thread until no new audio was recognized for 'stop_timer'. 
+        'stop_timer' can be either a timedelta or a number of seconds"""
+        
         if not self._listening: return
-        while datetime.now() - self.lasttime < stop_timer:
+        while (datetime.now() - self.lasttime).total_seconds() < stop_timer.total_seconds():
             time.sleep(0.1)
