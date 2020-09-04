@@ -1,3 +1,2 @@
 sounddevice>=0.4.0
 pipwin
-pipwin install pyaudio
