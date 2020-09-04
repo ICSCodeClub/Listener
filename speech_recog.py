@@ -77,5 +77,6 @@ class Listener():
         'stop_timer' can be either a timedelta or a number of seconds"""
         
         if not self._listening: return
-        while (datetime.now() - self.lasttime).total_seconds() < stop_timer.total_seconds():
+        if isinstance(stop_timer, timedelta): stop_timer = stop_timer.total_seconds()
+        while (datetime.now() - self.lasttime).total_seconds() < stop_timer:
             time.sleep(0.1)
